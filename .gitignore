@@ -19,6 +19,8 @@ bin/
 .cache-main
 .cache-tests
 
+# ruby
+
 
 *.rbc
 capybara-*.html
@@ -69,3 +71,9 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# sbt
+jenkins/.cache
+jenkins/.java
+jenkins/.sbt
+jenkins/.ivy2
