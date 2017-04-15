@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.10">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.26.2">
+      <projectUrl>https://github.com/yurayuramen/try-ci/</projectUrl>
+      <displayName>github</displayName>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.TextParameterDefinition>
+          <name>githubSourceBranch</name>
+          <description></description>
+          <defaultValue>develop</defaultValue>
+        </hudson.model.TextParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers/>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.29">
+    <script>node {
+   echo &apos;start&apos;
+   
+   checkout([$class: &apos;GitSCM&apos;,
+      userRemoteConfigs: [[
+        url: &apos;https://github.com/yurayuramen/try-ci.git&apos;
+      ]],
+      branches: [[name: &quot;origin/${githubSourceBranch}&quot;]] // 変数展開できるように &quot; で囲うこと
+    ])
+   
+   stage(&apos;Build&apos;) {
+       def builds = [:]
+       builds[&apos;scala&apos;] = {
+           // assumes you have the sbt plugin installed and created an sbt installation named &apos;sbt-0.13.13&apos;
+           sh &quot;${tool name: &apos;sbt-0.13.13&apos;, type: &apos;org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation&apos;}/bin/sbt compile dist&quot;
+       }
+       builds[&apos;frontend&apos;] = {
+           echo &apos;building the frontend&apos;
+       }
+     parallel builds
+   }
+
+   echo &apos;finish&apos;
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+</flow-definition>
