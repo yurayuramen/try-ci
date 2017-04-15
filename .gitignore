@@ -22,6 +22,8 @@ bin/
 *.rbc
 capybara-*.html
 .rspec
+ror_rails_adm/bundle
+ror_rails_adm/bundle2
 ror_rails_adm/log
 ror_rails_adm/tmp
 ror_rails_adm/db/*.sqlite3
