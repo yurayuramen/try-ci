@@ -32,6 +32,8 @@ ror_rails_adm/db/*.sqlite3-journal
 ror_rails_adm/public/system
 ror_rails_adm/coverage/
 ror_rails_adm/spec/tmp
+ror_rails_adm/wiki
+
 *.orig
 ror_rails_adm/rerun.txt
 pickle-email-*.html
