@@ -1,0 +1,22 @@
+version: '2'
+services:
+  play:
+    build: .
+    image: tryci_play
+    container_name: tryci_play
+    command:
+      [ "bash", "-c", "ls . ; rm -f tmp/pids/server.pid; ./bin/try-ci" ]
+    mem_limit: 384m
+    ports:
+      - "9000:9000"
+    depends_on:
+      - "mysql"
+  
+  mysql:
+    image: mysql:5.6
+    container_name: tryci_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "passwd"
+    ports:
+      - "3306:3306"
+    
