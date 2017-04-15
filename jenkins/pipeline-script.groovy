@@ -10,7 +10,7 @@ node {
       userRemoteConfigs: [[
         url: 'https://github.com/yurayuramen/try-ci.git'
       ]],
-      branches: [[name: "origin/${githubSourceBranch}"]] // •Ï”“WŠJ‚Å‚«‚é‚æ‚¤‚É &quot; ‚ÅˆÍ‚¤‚±‚Æ
+      branches: [[name: "origin/${githubSourceBranch}"]] // å¤‰æ•°å±•é–‹ã§ãã‚‹ã‚ˆã†ã« &quot; ã§å›²ã†ã“ã¨
     ])
    
    stage('Build') {
@@ -22,6 +22,10 @@ node {
         }
         builds['frontend'] = {
            echo 'building the frontend';
+        }
+        builds['docker'] = {
+           //sh '/usr/local/bin/docker-compose build rails';
+           sh '/usr/local/bin/docker build -t tryci_rails ror_rails_adm'
         }
        parallel builds
     }

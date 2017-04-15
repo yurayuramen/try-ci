@@ -6,7 +6,8 @@ FROM jenkinsci/blueocean:latest
 # docker build -t try_ci_jenkins -f Dockerfile-jenkins .
 # 
 # ビルドコマンド
-# docker run -p 8080:8080 --name try_ci_jenkins try_ci_jenkins 
+# docker run -p 8080:8080 -v "/e/docker/try-ci/jenkins/.ivy2:/root/.ivy2" --name try_ci_jenkins try_ci_jenkins 
+# docker run -p 8080:8080 -v "/e/docker/try-ci/jenkins/.ivy2:/var/jenkins_home" --name try_ci_jenkins try_ci_jenkins 
 #
 
 USER root
@@ -43,5 +44,6 @@ RUN cd /tmp && unzip sbt-0.13.13.zip && mv /tmp/sbt-launcher-packaging-0.13.13 /
 RUN curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
  chmod +x /usr/local/bin/docker-compose
 
-USER jenkins
+#USER jenkins
+USER root
 
