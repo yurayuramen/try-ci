@@ -1,0 +1,35 @@
+version: '2'
+services:
+  rails:
+    build: .
+    image: radm_rails
+    container_name: radm_rails
+    command:
+#    [ "bash" , "-c" ,"rm tmp/pids/server.pid; bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- bin/rails s -b 0.0.0.0"]
+#    bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- bin/rails s -b 0.0.0.0
+#    bundle exec rdebug-ide --host 0.0.0.0 -x -d --port 1234 --dispatcher-port 26162 -- bin/rails s -b 0.0.0.0
+      [ "bash", "-c", "ls . ; rm -f tmp/pids/server.pid; ./bin/rails server -b 0.0.0.0" ]
+    mem_limit: 384m
+    environment:
+      DISABLE_SPRING: "1"
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3000:3000"
+      - "1234:1234"
+      - "26162:26162"
+    volumes:
+#      - "${BUNDLE_DIR}:/usr/local/bundle"
+      - "${MNT_DIR}:/usr/src/app"
+      - "/etc/localtime:/etc/localtime:ro"
+    links:
+#    - "scaffold_rails"
+      - "mysql"
+
+  mysql:
+    image: mysql:5.6
+    container_name: radm_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "passwd"
+    ports:
+      - "3306:3306"
+    

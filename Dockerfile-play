@@ -1,0 +1,38 @@
+FROM java:8u92-jdk-alpine
+
+
+RUN apk update
+RUN apk add bash
+
+RUN apk --update add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/*
+
+#
+# 変数宣言を実施
+# 以降、${変数名}もしくは $変数名の形式で宣言した変数が利用可能になる 
+#
+ARG lang
+ARG ZIPFILENAME
+ARG UNZIPDIR
+
+ENV LANG ${lang}
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ${lang}
+
+# sbt stageの結果（成果物）をそのままimageに流し込む
+COPY target/universal/${ZIPFILENAME} /tmp
+
+RUN cd /tmp && \
+    unzip ${ZIPFILENAME} && \
+    mkdir /usr/src && \
+    mv ${UNZIPDIR} /usr/src/app && \
+    cd /usr/src/app && \
+    chmod +x ./bin/try-ci 
+    
+WORKDIR /usr/src/app
+EXPOSE 9000
+
+USER play
+CMD [ "bash", "-c", "rm -f RUNNING_PID; ./bin/try-ci" ]

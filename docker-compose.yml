@@ -1,7 +1,13 @@
 version: '2'
 services:
   play:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-play
+      args:
+        - lang=${LANG}
+        - ZIPFILENAME=${ZIPFILENAME}
+        - UNZIPDIR=${UNZIPDIR}
     image: tryci_play
     container_name: tryci_play
     command:
@@ -11,12 +17,28 @@ services:
       - "9000:9000"
     depends_on:
       - "mysql"
-  
+  rails:
+    build:
+      context: ror_rails_adm
+      dockerfile: Dockerfile
+    image: tryci_rails
+    container_name: tryci_rails
+    command:
+      [ "bash", "-c", "ls . ; rm -f tmp/pids/server.pid; ./bin/rails server -b 0.0.0.0" ]
+    mem_limit: 384m
+    environment:
+      DISABLE_SPRING: "1"
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "mysql"
   mysql:
     image: mysql:5.6
     container_name: tryci_mysql
     environment:
       MYSQL_ROOT_PASSWORD: "passwd"
+      TZ: "Japan"
     ports:
       - "3306:3306"
     
