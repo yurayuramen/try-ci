@@ -17,3 +17,49 @@ bin/
 .settings/
 .cache-main
 .cache-tests
+
+
+*.rbc
+capybara-*.html
+.rspec
+ror_rails_adm/log
+ror_rails_adm/tmp
+ror_rails_adm/db/*.sqlite3
+ror_rails_adm/db/*.sqlite3-journal
+ror_rails_adm/public/system
+ror_rails_adm/coverage/
+ror_rails_adm/spec/tmp
+*.orig
+ror_rails_adm/rerun.txt
+pickle-email-*.html
+
+# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
+ror_rails_adm/config/initializers/secret_token.rb
+
+# Only include if you have production secrets in this file, which is no longer a Rails default
+# config/secrets.yml
+
+# dotenv
+# TODO Comment out this rule if environment variables can be committed
+ror_rails_adm/.env
+
+## Environment normalization:
+/.bundle
+ror_rails_adm/vendor/bundle
+
+# these should all be checked in to normalize the environment:
+# Gemfile.lock, .ruby-version, .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+# if using bower-rails ignore default bower_components path bower.json files
+ror_rails_adm/vendor/assets/bower_components
+*.bowerrc
+bower.json
+
+# Ignore pow environment settings
+.powenv
+
+# Ignore Byebug command history file.
+.byebug_history
