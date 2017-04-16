@@ -11,7 +11,10 @@ generated.truststore
 .env
 
 # Scala-IDE specific
-bin/
+bin/**/*.class
+bin/**/*.xml
+bin/**/*.conf
+bin/**/routes
 .scala_dependencies
 .classpath
 .project

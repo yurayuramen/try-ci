@@ -29,4 +29,10 @@ node {
         }
        parallel builds
     }
+
+    stage('start-mysql'){
+        
+        sh 'docker run --rm --name mysql -p "3306:3306" mysql:5.6'
+        sh 'docker run --rm --name ror_init tryci_rails rails db:create && rails:db:migrate && rails:db:seed'
+    }
 }
