@@ -33,7 +33,7 @@ libraryDependencies ++= Seq(
 //wartremoverErrors ++= Warts.unsafe
 
 wartremoverWarnings ++= Warts.unsafe
-//�g������̈������̂����O
+//使い勝手の悪いものを除外
 wartremoverWarnings --= Seq( Wart.NonUnitStatements , Wart.DefaultArguments )
 
 wartremoverExcluded ++= Seq ( 
@@ -43,4 +43,10 @@ wartremoverExcluded ++= Seq (
 	,baseDirectory.value / "target" / "scala-2.11" / "routes" / "main" / "router" / "Routes.scala"
 	,baseDirectory.value / "target" / "scala-2.11" / "routes" / "main" / "router" / "RoutesPrefix.scala"
 )
+
+//testタスクで実行するテストコードを限定させる（通常はすべてのテストコードが対象になる）
+//絞り込み条件の設定
+//testOptions in Test := Seq(Tests.Filter(s => s.endsWith("ControllerSpec")))
+//絞り込みを有効にしたいときコメント解除
+//fork in Test := true
 
