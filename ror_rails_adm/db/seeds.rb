@@ -50,4 +50,3 @@ P2Simple.create(:name => "たごさく", :age=>32 , :memo => "すわっと")
 P2Simple.create(:name => "たごさく", :age=>32 , :memo => "すわっと")
 P2Simple.create(:name => "たごさく", :age=>32 , :memo => "すわっと")
 P2Simple.create(:name => "たごさく", :age=>32 , :memo => "すわっと")
-ｖ
