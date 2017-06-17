@@ -1,0 +1,11 @@
+@(list:Seq[services.QueryOfP2Simple.Row1])
+
+<table>
+@for(row <- list){
+	<tr>
+		<td>@row.id</td>
+		<td>@row.name</td>
+		<td>@row.memo</td>
+	</tr>
+}
+</table>

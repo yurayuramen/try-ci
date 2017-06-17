@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>P7 Scaffolds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Birthday</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @p7_scaffolds.each do |p7_scaffold| %>
+      <tr>
+        <td><%= p7_scaffold.name %></td>
+        <td><%= p7_scaffold.email %></td>
+        <td><%= p7_scaffold.birthday %></td>
+        <td><%= link_to 'Show', p7_scaffold %></td>
+        <td><%= link_to 'Edit', edit_p7_scaffold_path(p7_scaffold) %></td>
+        <td><%= link_to 'Destroy', p7_scaffold, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New P7 Scaffold', new_p7_scaffold_path %>

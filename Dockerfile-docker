@@ -1,0 +1,21 @@
+# FROM docker
+FROM alpine:3.5
+
+RUN apk add --no-cache \
+		ca-certificates \
+		curl \
+		openssl
+
+RUN apk add --no-cache ca-certificates docker
+
+COPY jenkins/docker-entrypoint.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+USER root
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+# CMD ["daemon"]
+CMD [ "dockerd" , "-s" , "overlayfs" ,"--containerd" ,"/run/containerd.sock" ]
+
+

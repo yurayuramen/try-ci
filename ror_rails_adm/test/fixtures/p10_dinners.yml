@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  zensai_title: MyString
+  zensai_detail: MyText
+  fish_title: MyString
+  fish_detail: MyText
+  meat_title: MyString
+  meat_detail: MyText
+  main_title: MyString
+  main_detail: MyText
+  dessert_title: MyString
+  dessert_detail: MyText
+
+two:
+  title: MyString
+  zensai_title: MyString
+  zensai_detail: MyText
+  fish_title: MyString
+  fish_detail: MyText
+  meat_title: MyString
+  meat_detail: MyText
+  main_title: MyString
+  main_detail: MyText
+  dessert_title: MyString
+  dessert_detail: MyText
